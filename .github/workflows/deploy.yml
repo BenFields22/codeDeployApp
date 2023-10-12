@@ -41,16 +41,9 @@ jobs:
         working-directory: ${{ env.applicationfolder }}
         run: msbuild webapplication3.sln /p:Configuration=Release /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl=.\bin\publish
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          working-directory: ${{ env.applicationfolder }}
-          name: published_webapp
-          path: bin\Release\Publish
-
-      # - name: Upload Artifact to s3
-      #   working-directory: ${{ env.applicationfolder }}/target
-      #   run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
+      - name: Upload Artifact to S3
+        working-directory: ${{ env.applicationfolder }}
+        run: aws s3 cp .\bin\publish s3://${{ vars.S3BUCKET }}/deployment/ --recursive
 
   # deploy:
   #   needs: build
