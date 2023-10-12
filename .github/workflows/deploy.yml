@@ -43,8 +43,8 @@ jobs:
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1.0.0
-        working-directory: ${{ env.applicationfolder }}
         with:
+          working-directory: ${{ env.applicationfolder }}
           name: published_webapp
           path: bin\Release\Publish
 
