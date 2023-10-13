@@ -45,12 +45,6 @@ jobs:
         working-directory: ${{ env.applicationfolder }}
         run: aws s3 cp \bin\Release\Publish s3://${{ env.S3BUCKET }}/ --recursive
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: published_webapp
-          path: bin\Release\Publish
-
   # deploy:
   #   needs: build
   #   runs-on: ubuntu-latest
