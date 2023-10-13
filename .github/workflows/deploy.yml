@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Publish Web App
         working-directory: ${{ env.applicationfolder }}
-        run: msbuild webapplication3.sln /p:Configuration=Release /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl= \bin\Release\Publish
+        run: msbuild webapplication3.sln /p:Configuration=Release /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl=\bin\Release\Publish
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1.0.0
