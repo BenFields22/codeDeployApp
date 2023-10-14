@@ -232,18 +232,7 @@ Resources:
             Action:
               - "sts:AssumeRole"
       ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'
-      Policies:
-        -
-          PolicyName: "allow-webapp-deployment-bucket-policy"
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              -
-                Effect: "Allow"
-                Action: 
-                - "s3:getObject"
-                Resource: !Sub arn:${AWS::Partition}:s3:::${WebappDeploymentBucket}/*
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
   IDCProvider:
       Type: AWS::IAM::OIDCProvider
       Properties:
