@@ -405,10 +405,10 @@ Resources:
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpErrors
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpRedirect
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-ApplicationDevelopment
-
-            Enable-WindowsOptionalFeature -online -FeatureName NetFx4Extended-ASPNET45
+                       
+            Enable-WindowsOptionalFeature -Online -FeatureName NetFx4Extended-ASPNET45
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-NetFxExtensibility45
-
+            
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-HealthAndDiagnostics
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpLogging
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-LoggingLibraries
@@ -430,10 +430,21 @@ Resources:
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-ISAPIExtensions
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-ISAPIFilter
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpCompressionStatic
-
+                       
             Enable-WindowsOptionalFeature -Online -FeatureName IIS-ASPNET45
-
-            cd C:\inetpub\wwwroot
+                       
+            Set-ExecutionPolicy RemoteSigned -Force
+            New-Item -Path "C:\temp" -ItemType "directory" -Force
+            Invoke-WebRequest -Uri "https://aws-codedeploy-us-west-2.s3.amazonaws.com/latest/codedeploy-agent.msi" -OutFile "C:\temp\codedeploy-agent.msi"
+            C:\temp\codedeploy-agent.msi /quiet /l C:\temp\host-agent-install-log.txt
+            powershell.exe -Command Get-Service -Name codedeployagent
+                       
+            Import-Module AWSPowerShell
+            cd C:\inetpub\wwwroot 
+            Remove-Item C:\inetpub\wwwroot\* -Recurse -Force
+            Copy-S3Object -BucketName codedeploydotnetstack-webappdeploymentbucket-13cquf634vd7q -Key deployment.zip -LocalFile c:\inetpub\wwwroot\deployment.zip
+            Expand-Archive C:\inetpub\wwwroot\deployment.zip -DestinationPath C:\inetpub\wwwroot\
+            rm .\deployment.zip
             start http://127.0.0.1
           </powershell>
   AutoScalingGroup:
