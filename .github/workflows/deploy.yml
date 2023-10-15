@@ -44,9 +44,13 @@ jobs:
       - name: Update S3 client to use crt
         run: aws configure set default.s3.preferred_transfer_client crt
 
+      - uses: vimtor/action-zip@v1.1
+        with:
+          files: \bin\Release\Publish\
+          dest: \bin\Release\Package\deployment.zip
+
       - name: Upload Artifact to S3
-        working-directory: ${{ env.applicationfolder }}
-        run: aws s3 cp \bin\Release\Publish s3://${{ env.S3BUCKET }}/ --recursive
+        run: aws s3 cp \bin\Release\Package\deployment.zip s3://${{ env.S3BUCKET }}/
 
   # deploy:
   #   needs: build
