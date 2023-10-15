@@ -480,7 +480,7 @@ Resources:
   ALBTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      HealthCheckIntervalSeconds: 10
+      HealthCheckIntervalSeconds: 60
       UnhealthyThresholdCount: 2
       HealthyThresholdCount: 2
       HealthCheckPath: "/"

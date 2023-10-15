@@ -1,8 +1,9 @@
 name: Build and Deploy
 
 on:
-  workflow_dispatch: {}
-
+  push:
+    branches:
+      - main
 env:
   applicationfolder: dotNetLegacy
   AWS_REGION: us-west-2
