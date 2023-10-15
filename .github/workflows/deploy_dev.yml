@@ -6,6 +6,7 @@ on:
       - dev
 env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+  applicationfolder: dotNetLegacy
 
 jobs:
   build:
@@ -22,7 +23,9 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.2
 
       - name: Restore NuGet Packages
+        working-directory: ${{ env.applicationfolder }}
         run: nuget restore webapplication3.sln
 
       - name: Build and Publish Web App
+        working-directory: ${{ env.applicationfolder }}
         run: msbuild webapplication3.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishProfileRootFolder="C:\Users\Administrator\source\repos\WebApplication3\WebApplication3\Properties\PublishProfiles\"
