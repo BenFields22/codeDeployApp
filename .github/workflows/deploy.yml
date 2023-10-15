@@ -46,10 +46,12 @@ jobs:
 
       - uses: vimtor/action-zip@v1.1
         with:
+          working-directory: ${{ env.applicationfolder }}
           files: \bin\Release\Publish\
           dest: \bin\Release\Package\deployment.zip
 
       - name: Upload Artifact to S3
+        working-directory: ${{ env.applicationfolder }}
         run: aws s3 cp \bin\Release\Package\deployment.zip s3://${{ env.S3BUCKET }}/
 
   # deploy:
