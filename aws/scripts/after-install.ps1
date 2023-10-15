@@ -1,3 +1,4 @@
+Set-ExecutionPolicy RemoteSigned -Force
 Import-Module AWSPowerShell
 cd C:\inetpub\wwwroot 
 Copy-S3Object -BucketName codedeploydotnetstack-webappdeploymentbucket-13cquf634vd7q -Key deployment.zip -LocalFile c:\inetpub\wwwroot\deployment.zip
